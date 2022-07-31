@@ -26,6 +26,20 @@ func (a *API) GetProducts(empty string, reply *[]Product) error {
 	return nil
 }
 
+func (a *API) GetProductById(id int, reply *Product) error {
+	var productRes Product
+
+	for _, product := range products {
+		if product.Id == id {
+			productRes = product
+		}
+	}
+
+	*reply = productRes
+
+	return nil
+}
+
 func main() {
 	products = []Product{
 		{
