@@ -32,6 +32,7 @@ func (a *API) GetProductById(id int, reply *Product) error {
 	for _, product := range products {
 		if product.Id == id {
 			productRes = product
+			break
 		}
 	}
 
@@ -39,7 +40,6 @@ func (a *API) GetProductById(id int, reply *Product) error {
 
 	return nil
 }
-
 
 func (a *API) AddProduct(product Product, reply *Product) error {
 	products = append(products, product)
@@ -65,6 +65,21 @@ func (a *API) UpdateProductById(updatedProduct Product, reply *Product) error {
 	return nil
 }
 
+func (a *API) DeleteProductById(id int, reply *Product) (error) {
+	var deletedProduct Product
+
+	for _, product := range products {
+		if product.Id == id {
+			products = append(products[:id], products[id + 1:]...)
+			deletedProduct = product
+			break
+		}
+	}
+
+	*reply = deletedProduct
+
+	return nil
+}
 
 func main() {
 	products = []Product{
