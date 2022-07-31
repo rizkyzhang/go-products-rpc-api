@@ -40,6 +40,14 @@ func (a *API) GetProductById(id int, reply *Product) error {
 	return nil
 }
 
+
+func (a *API) AddProduct(product Product, reply *Product) error {
+	products = append(products, product)
+	*reply = product
+
+	return nil
+}
+
 func main() {
 	products = []Product{
 		{
