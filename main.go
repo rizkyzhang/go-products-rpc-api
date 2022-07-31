@@ -48,6 +48,24 @@ func (a *API) AddProduct(product Product, reply *Product) error {
 	return nil
 }
 
+func (a *API) UpdateProductById(updatedProduct Product, reply *Product) error {
+	var newProducts []Product
+
+	for _, product := range products {
+		if product.Id == updatedProduct.Id {
+			newProducts = append(newProducts, updatedProduct) 
+		} else {
+			newProducts = append(newProducts, product)
+		}
+	}
+
+	products = newProducts
+	*reply = updatedProduct
+
+	return nil
+}
+
+
 func main() {
 	products = []Product{
 		{
